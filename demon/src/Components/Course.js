@@ -4,29 +4,40 @@ import {
   CardTitle,
   CardSubtitle,
   CardText,
-  CardFooter,
+  
   Button,
   Container,
 } from "reactstrap";
 import { toast } from "react-toastify";
 
-function Course() {
+function Course({course}) {
 
     const start = () => {
-        toast.success('Started');
+        toast.success('Started', {
+          position: "top-center"
+        });
+    }
+
+    const end = () => {
+        toast.error('Deleted', {
+          position: "top-center",
+          theme : "light"
+        });
     }
 
   return (
     <Card
       style={{
         width: "18rem",
+        padding: 20,
+        margin: 50
       }}
     >
-      <img alt="Sample" src="https://repository-images.githubusercontent.com/410214337/070f2aba-d9d6-4699-b887-9a0f29015b1b" />
+      <img alt="Sample" src={course.src} />
       <CardBody>
-        <CardTitle  tag="h5">React JS</CardTitle>
+        <CardTitle  tag="h5">{course.name}</CardTitle>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
-          Course
+          {course.title}
         </CardSubtitle>
         <CardText>
           React is a free and open-source front-end JavaScript library for
@@ -35,8 +46,10 @@ function Course() {
           used to develop single-page, mobile, or server-rendered applications
           with frameworks like Next.js
         </CardText>
-        <Button onClick={start}>Start Course</Button>
-        <Button style={{marginLeft: 5}}> Delete </Button>
+        <Container className="text-center">
+          <Button color="success" onClick={start}>Start Course</Button>
+          <Button color="danger" onClick={end} style={{marginLeft: 5}}> Delete </Button>
+        </Container>
       </CardBody>
     </Card>
   );
